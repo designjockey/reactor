@@ -1,12 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
- 
-module.exports = {
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+const webpackConfig = {
   entry: __dirname + '/app/app.js',
-  context: __dirname + '/app',
+  context: __dirname + '/app/components',
   output: { 
-  	path: __dirname + '/dist',
-  	filename: 'app.js' 
+    path: __dirname + '/dist',
+    filename: 'app.js' 
   },
   target: 'web',
   module: {
@@ -23,15 +25,15 @@ module.exports = {
   },
   extensions: ['', '.js'],
   resolve: {
-    extensions: ['', '.js'],
+    modulesDirectories: [
+      'node_modules'
+    ],
+    extensions: ['', '.json', '.js'],
     root: __dirname + '/app'
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: false
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     })
   ],
   devServer: {
@@ -39,3 +41,15 @@ module.exports = {
     hot: true
   }
 };
+
+if (isProduction) {
+  webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
+    sourceMap: false,
+    mangle: false,
+    beautify: true,
+    'screw-ie8': true,
+    compress: true
+  }));
+}
+
+module.exports = webpackConfig;
