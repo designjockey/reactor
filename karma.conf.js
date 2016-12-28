@@ -6,16 +6,16 @@ webpackConfig.devtool = 'inline-source-map';
 module.exports = function karmaConfig(config) {
   config.set({
     basePath: '',
-    browsers: [ 'PhantomJS' ],
+    browsers: ['PhantomJS'],
     singleRun: true,
-    frameworks: [ 'jasmine' ],
+    frameworks: ['jasmine'],
 
     files: [
-      'test/jasmine/index.js'
+      'test/jasmine/index.js',
     ],
 
     preprocessors: {
-      'test/jasmine/index.js': [ 'webpack', 'sourcemap' ]
+      'test/jasmine/index.js': ['webpack', 'sourcemap'],
     },
 
     plugins: [
@@ -23,21 +23,21 @@ module.exports = function karmaConfig(config) {
       'karma-webpack',
       'karma-jasmine',
       'karma-sourcemap-loader',
-      'karma-babel-preprocessor'
+      'karma-babel-preprocessor',
     ],
 
     webpack: webpackConfig,
 
     webpackServer: {
-      noInfo: true
+      noInfo: true,
     },
-  
+
     logLevel: config.LOG_INFO,
 
     babelPreprocessor: {
       options: {
-        presets: ['es2015','react']
-      }
+        presets: ['es2015', 'react'],
+      },
     },
 
     webpackMiddleware: {
@@ -47,8 +47,8 @@ module.exports = function karmaConfig(config) {
         version: false,
         assets: false,
         chunks: false,
-        chunkModules: false
-      }
-    }
+        chunkModules: false,
+      },
+    },
   });
 };
