@@ -11,6 +11,16 @@ const webpackConfig = {
   },
   target: 'web',
   module: {
+    preLoaders: [
+      {
+        test: /.js?$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react'],
+        },
+      },
+    ],
     loaders: [
       {
         test: /.js?$/,
