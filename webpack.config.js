@@ -1,6 +1,8 @@
 const webpack = require('webpack');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 const isProduction = process.env.NODE_ENV === 'production';
+console.log(isProduction);
 
 const webpackConfig = {
   entry: `${__dirname}/app/app.js`,
@@ -11,17 +13,16 @@ const webpackConfig = {
   },
   target: 'web',
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /.js?$/,
         loader: 'eslint-loader',
         exclude: /node_modules/,
+        enforce: 'pre',
         query: {
           presets: ['es2015', 'react'],
         },
       },
-    ],
-    loaders: [
       {
         test: /.js?$/,
         loader: 'babel-loader',
@@ -32,15 +33,14 @@ const webpackConfig = {
       },
     ],
   },
-  extensions: ['', '.js'],
   resolve: {
-    modulesDirectories: [
+    modules: [
       'node_modules',
+      `${__dirname}/app`
     ],
-    extensions: ['', '.json', '.js'],
-    root: `${__dirname}/app`,
   },
   plugins: [
+    new WebpackNotifierPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     }),
@@ -55,9 +55,10 @@ if (isProduction) {
   webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
     sourceMap: false,
     mangle: false,
-    beautify: true,
+    beautify: false,
     'screw-ie8': true,
     compress: true,
+    warnings: false,
   }));
 }
 
