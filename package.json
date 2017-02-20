@@ -7,7 +7,7 @@
     "test": "karma start",
     "watch:test": "npm test -- --auto-watch --no-single-run",
     "start": "webpack-dev-server --history-api-fallback --hot --inline --progress --colors --port 3000",
-    "build": "NODE_ENV=production webpack --progress --colors",
+    "build": "NODE_ENV=production webpack --colors",
     "lint": "./node_modules/.bin/eslint --fix"
   },
   "keywords": [],
@@ -40,7 +40,8 @@
     "requirejs": "^2.3.2",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0",
-    "webpack-hot-middleware": "^2.10.0"
+    "webpack-hot-middleware": "^2.10.0",
+    "webpack-notifier": "^1.5.0"
   },
   "dependencies": {
     "babel-runtime": "^6.9.2",
