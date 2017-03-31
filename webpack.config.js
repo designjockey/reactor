@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 const isProduction = process.env.NODE_ENV === 'production';
-console.log(isProduction);
+console.log('isProduction', isProduction);
 
 const webpackConfig = {
   entry: `${__dirname}/app/app.js`,
