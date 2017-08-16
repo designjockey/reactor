@@ -14,7 +14,7 @@
   "author": "Ritesh Manchanda <me@ritesh.it> (http://ritesh.it/)",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.9.1",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.9.0",
